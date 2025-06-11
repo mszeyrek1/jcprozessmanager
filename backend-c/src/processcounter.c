@@ -139,25 +139,19 @@ int main() {
         else if (strcmp(input, "rss") == 0) qsort(processes, count, sizeof(ProcessInfo), cmp_rss);
         else printf("Ungültige Eingabe. Keine Sortierung durchgeführt.\n");
     }
-    printf("\n%-*s  %-*s  %-*s  %-*s  %-*s  %-*s  %s\n",
-           max_pid, "PID",
-           max_name, "Name",
-           max_state, "State",
-           max_vmsize, "VmSize",
-           max_ppid, "PPid",
-           max_cputime, "CPUTime",
-           "RSS (KB)");
+    printf("[\n");
     for (int i = 0; i < count; i++) {
-        printf("%-*s  %-*s  %-*s  %-*s  %-*s  %-*s  %s\n",
-               max_pid, processes[i].pid,
-               max_name, processes[i].name,
-               max_state, processes[i].state,
-               max_vmsize, processes[i].vmsize,
-               max_ppid, processes[i].ppid,
-               max_cputime, processes[i].cputime,
-               processes[i].rss);
-    }
-
+    printf("  {\n");
+    printf("    \"pid\": \"%s\",\n", processes[i].pid);
+    printf("    \"name\": \"%s\",\n", processes[i].name);
+    printf("    \"state\": \"%s\",\n", processes[i].state);
+    printf("    \"vmsize\": \"%s\",\n", processes[i].vmsize);
+    printf("    \"ppid\": \"%s\",\n", processes[i].ppid);
+    printf("    \"cputime\": \"%s\",\n", processes[i].cputime);
+    printf("    \"rss\": \"%s\"\n", processes[i].rss);
+    printf("  }%s\n", (i < count - 1) ? "," : "");
+}
+    printf("]\n");
     printf("\nAnzahl Prozesse: %d\n", count);
     return 0;
 }

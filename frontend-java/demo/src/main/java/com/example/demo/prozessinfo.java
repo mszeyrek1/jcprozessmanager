@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class ProcessInfo {
+public class prozessinfo {
     private String pid;
     private String ppid;
     private String name;
